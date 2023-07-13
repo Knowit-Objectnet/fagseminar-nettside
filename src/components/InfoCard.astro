@@ -1,0 +1,56 @@
+---
+
+export interface Props {
+    title: string;
+    undertitle?: string;
+    icon: string;
+    imgUrl: string;
+}
+
+const { title, undertitle, icon, imgUrl } = Astro.props;
+---
+
+<>
+    <div class="hidden md:block w-full h-full bg-white">
+        <img class="inline-block m-0" src={imgUrl} />
+        <div class="p-8">
+            <h2 class="text-2xl font-bold inline-block pb-2">{title}</h2>
+            <div class="prose prose-a:text-[#ff00ff] prose-sm"><slot name="content1" /></div>
+        </div>
+    </div>
+    <details class="block md:hidden w-full bg-white px-8">
+        <summary class="flex gap-4 w-full font-bold p-2">
+            <img class="w-7 h-fit m-0" src={icon} />
+            <div>
+                <h2 class="text-xl">{title}</h2>
+                <h3 class="text-lg ">{undertitle}</h3>
+            </div>
+        </summary>
+        <div class="prose prose-base prose-a:text-[#ff00ff] max-w-full py-8"><slot name="content2" /></div>
+    </details>
+</>
+
+<style>
+    details > summary {
+        list-style-type: none;
+
+    }
+
+    details > summary::marker {
+        display: none;
+    }
+
+    details > summary::after {
+        background-image: url("/assets/Arrow-short-Digital-black.svg");
+        float: right;
+        min-width: 1rem;
+        min-height: 1rem;
+        width:1rem;
+        height:1rem;
+        content: "";
+        background-size: 1rem 1rem;
+    }
+    details[open] > summary:after {
+        transform: rotate(90deg);
+    }
+</style>

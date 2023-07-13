@@ -1,7 +1,29 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import InfoCard from "../components/InfoCard.astro";
+const cards = await Astro.glob("../markdown/infoCards/*.md");
 ---
 
 <Layout title="Mer Info">
-    <h1>Alt du trenger for å holde deg i loop-en</h1>
+    <div class="flex flex-col items-center">
+        <h1 class="text-xl font-bold">
+            Alt du trenger for å holde deg i loop-en
+        </h1>
+        <ul class="grid w-full md:grid-cols-2 lg:grid-cols-3 gap-4 p-2">
+            {
+                cards.map((card) => (
+                    <li class="w-full md:max-w-md">
+                        <InfoCard
+                            imgUrl={card.frontmatter.imgUrl}
+                            icon={card.frontmatter.icon}
+                            title={card.frontmatter.title}
+                        >
+                            {<card.Content slot="content1" />}{" "}
+                            {<card.Content slot="content2" />}
+                        </InfoCard>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
 </Layout>
