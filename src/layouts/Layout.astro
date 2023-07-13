@@ -23,7 +23,7 @@ const { title, active = Page.HOME } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body>
+  <body class="flex flex-col h-screen justify-between">
     <header>
       <div class="flex align-middle justify-center w-full h-24 bg-white">
         <img class="h-16 m-auto" src="/assets/Logotype-Knowit-Digital-black.svg" alt="Knowit logo" />
@@ -37,6 +37,12 @@ const { title, active = Page.HOME } = Astro.props;
     <main>
       <slot />
     </main>
+	<footer class="gray-background border-t border-[#A5B1AA]">
+		<div class="m-8">
+			<h1 class="text-xl font-bold">Hold deg informert!</h1>
+			<p class="">Vi er tilgjengelige på epost ... og på slack ...</p>
+		</div>
+	</footer>
   </body>
 </html>
 <style is:global>
@@ -61,5 +67,13 @@ const { title, active = Page.HOME } = Astro.props;
 
   .white-background {
 	background-color: white;
+  }
+
+  .gray-background {
+	background-color: #E4E1DB;
+  }
+
+  .green-background {
+	background-color: #A5B1AA;
   }
 </style>
