@@ -1,43 +1,65 @@
 ---
-export interface Props {
-	title: string;
+export enum Page {
+  HOME,
+  INFO,
+  PROGRAM
 }
 
-const { title } = Astro.props;
+export interface Props {
+  title: string;
+  active?: Page;
+}
+
+const { title, active = Page.HOME } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description">
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<header class="flex gap-4 m-8">
-			<a>Hjem</a>
-			<a>Mer Info</a>
-			<a>Program</a>
-		</header>
-		<main>
-			<slot />
-		</main>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header>
+      <div class="flex align-middle justify-center w-full h-24 bg-white">
+        <img class="h-16 m-auto" src="/assets/Logotype-Knowit-Digital-black.svg" alt="Knowit logo" />
+      </div>
+      <div class="flex gap-4 m-8">
+        <a class={active === Page.HOME ? 'active-class' : ''}>Hjem</a>
+        <a class={active === Page.INFO ? 'active-class' : ''}>Mer Info</a>
+        <a class={active === Page.PROGRAM ? 'active-class' : ''}>Program</a>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+  </body>
 </html>
 <style is:global>
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
-	}
+  :root {
+    --accent: 124, 58, 237;
+    --accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
+  }
+  html {
+    font-family: system-ui, sans-serif;
+    background-color: #F1F0ED;
+;
+  }
+  code {
+    font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New,
+      monospace;
+  }
+
+  .active-class {
+    text-decoration: #ea33f7 underline;
+    font-weight: bold;
+  }
+
+  .white-background {
+	background-color: white;
+  }
 </style>
